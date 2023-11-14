@@ -1,0 +1,16 @@
+{
+  "projects": {
+    "prisma-crud-generator": {
+      "type": "library",
+      "root": "libs/prisma-crud-generator",
+      "entryFile": "index",
+      "sourceRoot": "libs/prisma-crud-generator/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/prisma-crud-generator/tsconfig.lib.json"
+      }
+    }
+  },
+  "compilerOptions": {
+    "webpack": true
+  }
+}
