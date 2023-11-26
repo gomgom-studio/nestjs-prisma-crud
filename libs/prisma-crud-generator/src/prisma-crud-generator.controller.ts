@@ -11,9 +11,17 @@ import {
   Res,
 } from '@nestjs/common'
 import { Response } from 'express'
+import { PrismaCrudGeneratorService } from './prisma-crud-generator.service'
 
 export class PrismaCrudGeneratorController<T> {
   private readonly logger = new Logger('PrismaCrudGeneratorController')
+
+  constructor(
+    protected readonly service: PrismaCrudGeneratorService<T>,
+    tableName: string,
+  ) {
+    this.service.tableName = tableName
+  }
 
   @Get(':id')
   async readOne(
@@ -30,7 +38,8 @@ export class PrismaCrudGeneratorController<T> {
     @Query() query,
   ): Promise<Response<T>> {
     this.logger.log('readMany - query', query)
-    return response.status(HttpStatus.OK).json({})
+    const result = this.service.findMany()
+    return response.status(HttpStatus.OK).json(result)
   }
 
   @Post()
